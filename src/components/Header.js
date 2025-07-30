@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaNewspaper } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaNewspaper, FaUserAlt } from 'react-icons/fa';
 
 function Header() {
   const linkStyle = {
@@ -33,7 +33,7 @@ function Header() {
           <FaNewspaper />News
         </NavLink>
         <NavLink to="/contact" style={({ isActive }) => isActive ? { ...linkStyle, ...activeStyle } : linkStyle}>
-          Contact
+          <FaUserAlt />Contact
         </NavLink>
       </nav>
     </header>

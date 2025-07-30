@@ -1,9 +1,9 @@
 import React from 'react';
 
 const testimonials = [
-  { name: 'Amit', text: 'This app is awesome! 💯' },
-  { name: 'Sunita', text: 'Loved the UI and speed.' },
-  { name: 'Ravi', text: 'Perfect for my needs.' },
+  { name: 'Sunil', text: 'This app is awesome! 💯' },
+  { name: 'Yogi', text: 'Loved the UI and speed.' },
+  { name: 'Ajeet', text: 'Perfect for my needs.' },
 ];
 
 export default function Testimonials() {
