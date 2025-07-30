@@ -3,7 +3,7 @@ import React from 'react';
 function Home() {
   return (
     <div>
-      <h1>Welcome to the Home Page 🎉</h1>
+      <h1>Welcome to the Info and Masti world 🎉</h1>
       <p>This is a beautifully styled React application with routing and layout.</p>
       <div style={{
         marginTop: '2rem',

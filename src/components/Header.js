@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom';
 function Header() {
   return (
     <header>
-      <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>🚀 InfoMasti</div>
+      {/* LOGO → clickable to home */}
+      <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
+          🚀 InfoMasti
+        </div>
+      </Link>
+
       <nav>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
