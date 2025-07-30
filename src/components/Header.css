@@ -1,0 +1,75 @@
+header {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* New flex container for logo + hamburger */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Hamburger now floats right */
+.hamburger {
+  font-size: 1.5rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none; /* default hidden on desktop */
+}
+
+/* Desktop nav inline */
+.desktop-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+nav a.active {
+  text-decoration: underline;
+  color: #ffdd57;
+}
+
+/* Mobile nav */
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Show hamburger and mobile nav in small screens */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-nav.open {
+    display: flex;
+  }
+
+  .header-container {
+    width: 100%;
+  }
+}
