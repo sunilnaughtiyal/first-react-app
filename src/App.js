@@ -1,24 +1,23 @@
-import logo from './family.png';
+//import logo from './family.png';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import About from './pages/About';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to my real world.
-        </p>
-        {/*<a
-          className="App-link"
-          href="https://www.google.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >*/}
-          Sunil
-        {/* </a> */}
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </main>
+      <Footer />
+    </Router>
   );
 }
 
