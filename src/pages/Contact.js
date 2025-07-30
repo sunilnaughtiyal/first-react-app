@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Contact.css";
-import { supabase } from "./supabaseClient"; // Ensure this is correctly configured
+import { supabase } from "./supabaseClient";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -31,7 +31,6 @@ function Contact() {
     else if (!/^\d{10}$/.test(formData.phone))
       newErrors.phone = "Phone must be 10 digits";
     if (!formData.message.trim()) newErrors.message = "Message is required";
-
     return newErrors;
   };
 
@@ -40,25 +39,13 @@ function Contact() {
     setFormError("");
     const validationErrors = validate();
 
-    if (Object.keys(validationErrors).length !== 0) {
+    if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
     try {
-      // Submit to Formspree
-      const response = await fetch("https://formspree.io/f/xeozzjrz", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        setFormError("Failed to submit via Formspree.");
-        return;
-      }
-
-      // Insert into Supabase
+      // First insert into Supabase
       const { error: insertError } = await supabase.from("contacts").insert([
         {
           name: formData.name,
@@ -72,18 +59,15 @@ function Contact() {
       if (insertError) {
         console.error("Supabase insert error:", insertError);
 
-        // Custom error messages for unique constraint violations
         let newErrors = {};
         if (
-          insertError.message.includes('duplicate key value') &&
-          insertError.message.includes('"contacts_email_key"')
+          insertError.message.includes("contacts_email_key")
         ) {
           newErrors.email = "This email is already registered. Please use another.";
         }
 
         if (
-          insertError.message.includes('duplicate key value') &&
-          insertError.message.includes('"contacts_phone_key"')
+          insertError.message.includes("contacts_phone_key")
         ) {
           newErrors.phone = "This phone number is already registered. Please use another.";
         }
@@ -97,6 +81,18 @@ function Contact() {
         return;
       }
 
+      // Only submit to Formspree if Supabase insert succeeded
+      const response = await fetch("https://formspree.io/f/xeozzjrz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        setFormError("Message saved but failed to send email.");
+      }
+
+      // Reset form
       setSubmitted(true);
       setFormData({
         name: "",
