@@ -7,6 +7,7 @@ import {
   FaUserAlt,
   FaBars,
   FaTimes,
+  FaFireAlt,
 } from "react-icons/fa";
 import "./Header.css"; // ✅ import the CSS
 
@@ -19,7 +20,10 @@ function Header() {
         {/* Logo */}
         <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
           <div style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
-            🚀 InfoMasti
+            <div className="flex items-center gap-2">
+              <FaFireAlt size={32} color="#4ade80" />
+              <span className="text-xl font-bold">InfoMasti</span>
+            </div>
           </div>
         </NavLink>
 

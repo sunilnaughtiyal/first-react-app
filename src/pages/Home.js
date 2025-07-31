@@ -26,7 +26,7 @@ const Home = () => {
           textAlign: "center",
         }}
       >
-        <h1>🚀 Welcome to the world of Information and Entertainment</h1>
+        <h1>Welcome to the world of Information and Entertainment</h1>
         <p style={{ fontSize: "1.2rem" }}>
           Modern, fast, and built with love for you
         </p>
