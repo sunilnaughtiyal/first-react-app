@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-const tabs = ['React', 'Sitecore', 'DevOps'];
+const tabs = ['React', 'XMCloud', 'DevOps'];
 
-// Sample Markdown Questions for React
+// React Q&A (already included in your file)
 const reactQuestions = [
   {
     question: "### Q1. What is React?",
@@ -207,6 +207,49 @@ const reactQuestions = [
   }
 ];
 
+// Sitecore XM Cloud Q&A
+const sitecoreQuestions = [
+  {
+    question: '### Q1. What is Sitecore XM Cloud?',
+    answer: 'Sitecore XM Cloud is a cloud-native, headless CMS offered by Sitecore. It allows content authors to create, manage, and publish content without infrastructure management. It is based on Sitecore Experience Manager (XM), built for scalability, flexibility, and modern development practices.'
+  },
+  {
+    question: '### Q2. Difference between Sitecore XP and XM Cloud?',
+    answer: 'XP supports full personalization and analytics with xDB. XM Cloud is headless, cloud-native, and integrates with CDP/Personalize for personalization.'
+  },
+  {
+    question: '### Q3. What is Headless CMS?',
+    answer: 'A headless CMS separates the backend (content repository) from the frontend (presentation). Sitecore XM Cloud uses a headless approach by delivering content via APIs (GraphQL or REST) to any front-end framework (e.g., React, Next.js).'
+  },
+  {
+    question: '### Q4. What tools are used with XM Cloud?',
+    answer: 'Sitecore CLI, DevEx for VSCode, GraphQL Edge API, Sitecore Pages, JSS, and GitHub Actions for CI/CD.'
+  },
+  {
+    question: '### Q5. How is content delivered in XM Cloud?',
+    answer: 'Using GraphQL APIs through Sitecore Experience Edge, enabling fast, CDN-based, headless content delivery.'
+  },
+  {
+    question: '### Q6. What is Sitecore Pages?',
+    answer: 'A visual WYSIWYG editor in XM Cloud that allows drag-and-drop editing of components in a headless environment.'
+  },
+  {
+    question: '### Q7. How do you deploy in XM Cloud?',
+    answer: 'Push code to GitHub; deployment is automated via GitHub Actions or Vercel. Sitecore CLI can also be used for serialization and content deploy.'
+  },
+  {
+    question: '### Q8. What is Sitecore Edge?',
+    answer: 'A CDN-powered delivery platform to serve published content quickly through GraphQL APIs.'
+  },
+  {
+    question: '### Q9. What is the role of CDP and Personalize with XM Cloud?',
+    answer: 'CDP captures user data; Personalize delivers tailored content. XM Cloud integrates with them for advanced personalization.'
+  },
+  {
+    question: '### Q10. What is the purpose of sitecore.json in XM Cloud?',
+    answer: 'It defines site/project settings including app name, components, and deployment details for CLI-based automation.'
+  }
+];
 
 function About() {
   const [activeTab, setActiveTab] = useState('React');
@@ -217,10 +260,11 @@ function About() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const filteredReactQuestions = reactQuestions.filter(({ question, answer }) =>
-    question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    answer.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const getFilteredQuestions = (questions) =>
+    questions.filter(({ question, answer }) =>
+      question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      answer.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
   const renderAccordion = (questions) =>
     questions.map(({ question, answer }, index) => (
@@ -253,33 +297,32 @@ function About() {
     ));
 
   const renderContent = () => {
-    switch (activeTab) {
-      case 'React':
-        return (
-          <>
-            <input
-              type="text"
-              placeholder="Search React Q&A..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              style={{
-                padding: '10px',
-                marginBottom: '20px',
-                width: '100%',
-                borderRadius: '4px',
-                border: '1px solid #ccc'
-              }}
-            />
-            {renderAccordion(filteredReactQuestions)}
-          </>
-        );
-      case 'Sitecore':
-        return <p>Coming soon: Sitecore Interview Questions & Answers!</p>;
-      case 'DevOps':
-        return <p>Coming soon: DevOps Interview Questions & Answers!</p>;
-      default:
-        return null;
-    }
+    const tabData = {
+      React: reactQuestions,
+      XMCloud: sitecoreQuestions,
+      DevOps: []
+    };
+
+    const filteredQuestions = getFilteredQuestions(tabData[activeTab] || []);
+
+    return (
+      <>
+        <input
+          type="text"
+          placeholder={`Search ${activeTab} Q&A...`}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{
+            padding: '10px',
+            marginBottom: '20px',
+            width: '100%',
+            borderRadius: '4px',
+            border: '1px solid #ccc'
+          }}
+        />
+        {renderAccordion(filteredQuestions)}
+      </>
+    );
   };
 
   return (
