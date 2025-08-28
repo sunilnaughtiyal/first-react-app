@@ -73,3 +73,14 @@ nav a.active {
     width: 100%;
   }
 }
+.auth-btn {
+  background-color: #2563eb;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.auth-btn:hover {
+  background-color: #1d4ed8;
+}
+
